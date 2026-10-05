@@ -5,91 +5,170 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wilfred Allison</title>
 <meta name="description" content="Wilfred Allison: CS and Applied Math at Brown, AI researcher (Oxford and Brown) working on multi-agent reinforcement learning.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#fafaf8;--fg:#1a1a1a;--muted:#666;--line:#e4e4e0;--accent:#2f5d8a}
-@media (prefers-color-scheme:dark){:root{--bg:#121212;--fg:#ececec;--muted:#9a9a9a;--line:#2a2a2a;--accent:#7fb0e0}}
+:root{--bg:#0d0d0d;--fg:#ececec;--body:#bdbdbd;--muted:#7a7a7a;--accent:#ff5a4e;--btn:#1b1b1b;--btn-h:#262626;--line:#222}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
-main{max-width:720px;margin:0 auto;padding:64px 20px 80px}
-h1{font-size:2rem;margin:0 0 4px;letter-spacing:-.01em}
-h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:48px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
-h3{font-size:1rem;margin:0}
-p{margin:0 0 12px}
-a{color:var(--accent);text-decoration:none}
-a:hover{text-decoration:underline}
-.sub{color:var(--muted);margin-bottom:16px}
-.links{display:flex;flex-wrap:wrap;gap:16px;font-size:.95rem}
-.item{margin-bottom:24px}
-.row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.meta{color:var(--muted);font-size:.9rem}
-ul{margin:6px 0 0;padding-left:20px}
-li{margin-bottom:4px}
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-.tag{font-size:.8rem;border:1px solid var(--line);border-radius:4px;padding:1px 8px;color:var(--muted)}
-footer{margin-top:64px;color:var(--muted);font-size:.85rem}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--body);font:16px/1.75 "Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:18px max(20px,calc((100vw - 1060px)/2));background:linear-gradient(var(--bg) 60%,transparent)}
+.logo{font-family:"Italiana",serif;font-size:28px;color:var(--fg);letter-spacing:.02em}
+.menu{display:flex;gap:40px}
+.menu a{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--fg);transition:color .2s}
+.menu a:hover{color:var(--accent)}
+main{max-width:880px;margin:0 auto;padding:0 20px}
+.hero{padding:150px 0 60px}
+.hero h1{font-family:"Italiana",serif;font-weight:400;font-size:clamp(48px,8.5vw,84px);line-height:1.05;text-transform:uppercase;color:var(--fg);margin:0 0 36px;max-width:640px}
+.hero p{font-size:19px;line-height:1.65;color:var(--fg);max-width:500px;margin:0}
+section{padding:60px 0 0}
+.title{font-family:"Italiana",serif;font-weight:400;font-size:clamp(34px,5vw,48px);text-transform:uppercase;color:var(--fg);margin:40px 0 8px}
+.entry{display:grid;grid-template-columns:1fr 240px;gap:40px;align-items:start;padding:40px 0}
+.label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+.entry p{margin:0;font-size:15px}
+.meta{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:12px}
+.btn{display:block;background:var(--btn);color:var(--fg);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-align:center;padding:16px 20px;margin-top:28px;transition:background .2s}
+.btn:hover{background:var(--btn-h)}
+.btn.ghost{color:var(--muted);pointer-events:none}
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;padding:40px 0}
+.skills p{margin:0;font-size:15px}
+.contact{padding:60px 0 40px}
+.contact a.big{font-family:"Italiana",serif;font-size:clamp(28px,4vw,40px);color:var(--fg);border-bottom:1px solid var(--line);transition:color .2s}
+.contact a.big:hover{color:var(--accent)}
+.contact .row{display:flex;gap:32px;margin-top:32px}
+.contact .row a{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--fg)}
+.contact .row a:hover{color:var(--accent)}
+footer{padding:60px 0 40px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.top{position:fixed;right:40px;bottom:40px;width:36px;height:36px;color:var(--fg);opacity:0;transition:opacity .3s}
+.top.show{opacity:1}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+@media (max-width:720px){
+.menu{gap:18px}.menu a{font-size:10px;letter-spacing:.14em}
+.entry{grid-template-columns:1fr;gap:0}
+.skills{grid-template-columns:1fr;gap:20px}
+.hero{padding-top:120px}
+.top{right:20px;bottom:20px}
+}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
+<nav>
+<a class="logo" href="#">WA</a>
+<div class="menu">
+<a href="#projects">Projects</a>
+<a href="#about">About</a>
+<a href="#experience">Experience</a>
+<a href="#contact">Contact</a>
+</div>
+</nav>
+
 <main>
-<header>
-<h1>Wilfred Allison</h1>
-<div class="sub">CS &amp; Applied Mathematics at Brown University · AI Researcher, Oxford &amp; Brown</div>
-<div class="links">
-<a href="mailto:marple007.wa@gmail.com">Email</a>
+<header class="hero" id="about">
+<h1>Teaching agents to work together.</h1>
+<p>I'm Wilf, a Computer Science and Applied Mathematics student at Brown and an AI researcher with Oxford and Brown, working on multi-agent reinforcement learning. Scroll for projects ↓</p>
+</header>
+
+<section id="projects">
+<h2 class="title reveal">Projects</h2>
+
+<div class="entry reveal">
+<div>
+<p class="label">AI-integrated operating system</p>
+<p>A custom OS kernel built from scratch that replaces traditional memory allocation and process scheduling with learned policies, including a learned scheduler aimed at reducing average wait time and adapting to workload patterns.</p>
+<span class="meta">2026 · C · Systems · RL</span>
+</div>
+<a class="btn" href="https://github.com/MumbleFumble">View on GitHub →</a>
+</div>
+
+<div class="entry reveal">
+<div>
+<p class="label">Smart contract dApp · 2nd place</p>
+<p>A full-stack dApp with a custom smart contract on Polkadot Asset Hub, built in a 36-hour hackathon and presented through a live technical demo and a five-minute pitch.</p>
+<span class="meta">2025 · React · Polkadot</span>
+</div>
+<a class="btn ghost" href="#">Link coming soon</a>
+</div>
+
+<div class="entry reveal">
+<div>
+<p class="label">Algorand trading-bot builder · 4th of 180+</p>
+<p>Project manager for a team building a trading-bot builder on Algorand, placing fourth out of more than 180 teams.</p>
+<span class="meta">2025 · Algorand · Quant</span>
+</div>
+<a class="btn ghost" href="#">Link coming soon</a>
+</div>
+</section>
+
+<section id="experience">
+<h2 class="title reveal">Experience</h2>
+
+<div class="entry reveal">
+<div>
+<p class="label">AI Researcher · Oxford &amp; Brown</p>
+<p>Separate research projects with faculty at both universities, focused on cooperative MARL, emergent communication, opponent modeling, and decentralized policy learning.</p>
+<span class="meta">Jun 2026 to present · Oxford / Providence</span>
+</div>
+</div>
+
+<div class="entry reveal">
+<div>
+<p class="label">AI Developer · Outlier</p>
+<p>Evaluating and ranking LLM outputs for response quality, code correctness, and prompt robustness, and designing testing environments and adversarial challenges to gauge model accuracy.</p>
+<span class="meta">Aug 2025 to present</span>
+</div>
+</div>
+
+<div class="entry reveal">
+<div>
+<p class="label">Freelance Software Developer</p>
+<p>Delivered 5+ client projects, including a symbolic math solver and a Java game, turning ambiguous requirements into technical specs and keeping non-technical stakeholders up to date.</p>
+<span class="meta">Jul 2022 to Aug 2024</span>
+</div>
+</div>
+
+<div class="entry reveal">
+<div>
+<p class="label">Athlete · Brown Men's Crew</p>
+<p>Division I varsity rower, previously at Hinksey Sculling School and Wanganui Rowing Club, balancing 30+ hours a week of training with a full course load.</p>
+<span class="meta">2019 to present</span>
+</div>
+</div>
+</section>
+
+<section>
+<h2 class="title reveal">Toolkit</h2>
+<div class="skills reveal">
+<div><p class="label">Languages</p><p>Python, Java, JavaScript, C++, C, Rust</p></div>
+<div><p class="label">Machine learning</p><p>PyTorch, JAX, NumPy, scikit-learn, pandas</p></div>
+<div><p class="label">Tools</p><p>Git, Linux, LaTeX</p></div>
+</div>
+</section>
+
+<section class="contact" id="contact">
+<h2 class="title reveal">Say hello</h2>
+<div class="reveal">
+<a class="big" href="mailto:marple007.wa@gmail.com">marple007.wa@gmail.com</a>
+<div class="row">
 <a href="https://github.com/MumbleFumble">GitHub</a>
 <a href="https://linkedin.com/in/wilf-a">LinkedIn</a>
 </div>
-</header>
-
-<section>
-<h2>About</h2>
-<p>I study Computer Science and Applied Mathematics at Brown and work as an AI researcher jointly with the University of Oxford and Brown. My research focuses on multi-agent reinforcement learning: cooperative MARL, emergent communication, opponent modeling, and decentralized policy learning.</p>
-<p>Outside of research I row as a Division I varsity athlete for Brown Men's Crew.</p>
-</section>
-
-<section>
-<h2>Experience</h2>
-<div class="item">
-<div class="row"><h3>AI Researcher · University of Oxford &amp; Brown University</h3><span class="meta">Jun 2026 to present</span></div>
-<ul><li>Research projects with faculty at both universities on cooperative MARL, emergent communication, opponent modeling, and decentralized policy learning.</li></ul>
 </div>
-<div class="item">
-<div class="row"><h3>AI Developer · Outlier</h3><span class="meta">Aug 2025 to present</span></div>
-<ul><li>Evaluate and rank LLM outputs for response quality, code correctness, and prompt robustness.</li><li>Design testing environments and adversarial challenges to gauge model accuracy.</li></ul>
-</div>
-<div class="item">
-<div class="row"><h3>Freelance Software Developer</h3><span class="meta">Jul 2022 to Aug 2024</span></div>
-<ul><li>Delivered 5+ client projects, including a symbolic math solver and a Java game.</li><li>Turned ambiguous client requirements into technical specs and development plans.</li></ul>
-</div>
-</section>
-
-<section>
-<h2>Projects</h2>
-<div class="item">
-<div class="row"><h3>AI-integrated Operating System</h3><span class="meta">2026</span></div>
-<p>A custom OS kernel built from scratch that replaces traditional memory allocation and process scheduling with learned policies, including a learned scheduler aimed at reducing average wait time and adapting to workload patterns.</p>
-<div class="tags"><span class="tag">C</span><span class="tag">Systems</span><span class="tag">RL</span></div>
-</div>
-<div class="item">
-<div class="row"><h3>Smart Contract dApp · 2nd place</h3><span class="meta">2025</span></div>
-<p>Full-stack dApp with a custom smart contract on Polkadot Asset Hub, built in a 36-hour hackathon and presented in a live demo and 5-minute pitch.</p>
-<div class="tags"><span class="tag">React</span><span class="tag">Polkadot</span></div>
-</div>
-<div class="item">
-<div class="row"><h3>Algorand Trading-Bot Builder · 4th of 180+</h3><span class="meta">2025</span></div>
-<p>Project manager for a team building a trading-bot builder on Algorand.</p>
-<div class="tags"><span class="tag">Algorand</span><span class="tag">Quant</span></div>
-</div>
-</section>
-
-<section>
-<h2>Skills</h2>
-<p><strong>Languages:</strong> Python, Java, JavaScript, C++, C, Rust</p>
-<p><strong>ML:</strong> PyTorch, JAX, NumPy, scikit-learn, pandas</p>
-<p><strong>Tools:</strong> Git, Linux, LaTeX</p>
 </section>
 
 <footer>© 2026 Wilfred Allison</footer>
 </main>
+
+<a class="top" href="#" aria-label="Back to top"><svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 24 18 12l12 12"/></svg></a>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const upBtn=document.querySelector('.top');
+addEventListener('scroll',()=>upBtn.classList.toggle('show',scrollY>500),{passive:true});
+</script>
 </body>
 </html>
